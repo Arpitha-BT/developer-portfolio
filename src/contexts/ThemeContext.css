@@ -1,0 +1,12 @@
+.selctcolor-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.selectpalletPopMain {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
