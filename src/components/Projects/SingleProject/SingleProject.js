@@ -1,11 +1,11 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
 
-import placeholder from '../../../assets/png/placeholder.png';
+import one from '../../../assets/png/project1.png'
+import two from '../../../assets/png/project2.png'
 import './SingleProject.css';
 
 function SingleProject({ id, name, desc, tags, code, demo, image, theme }) {
-
     return (
         <Fade bottom>
             <div
@@ -20,7 +20,7 @@ function SingleProject({ id, name, desc, tags, code, demo, image, theme }) {
                     >
                         {name}
                     </h2>
-                    <img src={image ? image : placeholder} alt={name} />
+                    <img src={image === 'one'? one : two} alt={name} />
                 </div>
                 <p
                     className='project--desc'

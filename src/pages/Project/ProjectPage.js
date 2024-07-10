@@ -10,13 +10,13 @@ import { db } from "../../utils/firebaseConfig";
 import './ProjectPage.css'
 import { SingleProject } from '../../components';
 import { ThemeContext } from '../../contexts/ThemeContext';
-// import { projectsData } from '../../data/projectsData'
 import { headerData } from '../../data/headerData'
 
 function ProjectPage() {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [projectsData, setProjectsData] = useState(null);
+    const [search, setSearch] = useState('')
+    const [projectsData, setProjectsData] = useState([]);
     const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
@@ -33,6 +33,11 @@ function ProjectPage() {
         }
         fetchData();
     }, []);
+
+    const filteredArticles =  projectsData.filter((project) => {
+        const content = project.projectName + project.projectDesc + project.tags
+        return content.toLowerCase().includes(search.toLowerCase())
+    })
 
     const useStyles = makeStyles((t) => ({
         search: {
@@ -92,9 +97,13 @@ function ProjectPage() {
                 <h1 style={{ color: theme.secondary }}>Projects</h1>
             </div>
             <div className="projectPage-container">
+                <div className="projectPage-search">
+                    <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search project..." className={classes.search} />
+                </div>
                 <div className="project-container">
-                    {!isLoading && <Grid className="project-grid" container direction="row" alignItems="center" justifyContent="center">
-                        {projectsData.map(project => (
+                    {!isLoading && 
+                    <Grid className="project-grid" container direction="row" alignItems="center" justifyContent="center">
+                        {filteredArticles.map(project => (
                             <SingleProject
                                 theme={theme}
                                 key={project.id}
