@@ -10,7 +10,6 @@ import { db } from "../../utils/firebaseConfig";
 import './ProjectPage.css'
 import { SingleProject } from '../../components';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { headerData } from '../../data/headerData'
 
 function ProjectPage() {
 
@@ -88,7 +87,7 @@ function ProjectPage() {
     return (
         <div className="projectPage" style={{ backgroundColor: theme.secondary }}>
             <Helmet>
-                <title>{headerData.name} | Projects</title>
+                <title>Arpitha B T| Projects</title>
             </Helmet>
             <div className="projectPage-header" style={{ backgroundColor: theme.primary }}>
                 <Link to="/">
