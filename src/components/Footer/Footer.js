@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 import './Footer.css'
 import { ThemeContext } from '../../contexts/ThemeContext'
-import { headerData } from '../../data/headerData'
 
-function Footer() {
+function Footer(props) {
 
     const shortname = (name) => {
         if(name.length > 10) {
@@ -22,7 +21,7 @@ function Footer() {
                 <span style={{color: theme.primary, margin: '0 0.5rem -1rem 0.5rem'}}>
                     ❤
                 </span>
-                 by {shortname(headerData.name)}
+                 by {shortname(props.name)}
             </p>
         </div>
     )

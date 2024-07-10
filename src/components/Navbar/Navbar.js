@@ -10,10 +10,9 @@ import Drawer from '@material-ui/core/Drawer';
 import CloseIcon from '@material-ui/icons/Close';
 
 import './Navbar.css';
-import { headerData } from '../../data/headerData';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-function Navbar() {
+function Navbar(props) {
     const { theme, setHandleDrawer } = useContext(ThemeContext);
 
     const [open, setOpen] = useState(false);
@@ -133,7 +132,7 @@ function Navbar() {
         <div className='navbar'>
             <div className='navbar--container'>
                 <h1 style={{ color: theme.secondary }}>
-                    {shortname(headerData.name)}
+                    {shortname(props.name)}
                 </h1>
 
                 <IoMenuSharp

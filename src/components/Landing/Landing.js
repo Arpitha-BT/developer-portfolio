@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import './Landing.css';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { headerData } from '../../data/headerData';
-import { socialsData } from '../../data/socialsData';
 
 import {
     FaTwitter,
@@ -16,7 +14,7 @@ import {
     FaBlogger,
 } from 'react-icons/fa';
 
-function Landing() {
+function Landing(props) {
     const { theme, drawerOpen } = useContext(ThemeContext);
 
     const useStyles = makeStyles((t) => ({
@@ -75,9 +73,9 @@ function Landing() {
                     style={{ backgroundColor: theme.primary }}
                 >
                     <div className='lcl--content'>
-                        {socialsData.linkedIn && (
+                        {props.socialVal.linkedIn && (
                             <a
-                                href={socialsData.linkedIn}
+                                href={props.socialVal.linkedIn}
                                 target='_blank'
                                 rel='noreferrer'
                             >
@@ -88,9 +86,9 @@ function Landing() {
                                 />
                             </a>
                         )}
-                        {socialsData.github && (
+                        {props.socialVal.github && (
                             <a
-                                href={socialsData.github}
+                                href={props.socialVal.github}
                                 target='_blank'
                                 rel='noreferrer'
                             >
@@ -101,9 +99,9 @@ function Landing() {
                                 />
                             </a>
                         )}
-                        {socialsData.twitter && (
+                        {props.socialVal.twitter && (
                             <a
-                                href={socialsData.twitter}
+                                href={props.socialVal.twitter}
                                 target='_blank'
                                 rel='noreferrer'
                             >
@@ -114,9 +112,9 @@ function Landing() {
                                 />
                             </a>
                         )}
-                        {socialsData.youtube && (
+                        {props.socialVal.youtube && (
                             <a
-                                href={socialsData.youtube}
+                                href={props.socialVal.youtube}
                                 target='_blank'
                                 rel='noreferrer'
                             >
@@ -127,9 +125,9 @@ function Landing() {
                                 />
                             </a>
                         )}
-                        {socialsData.blogger && (
+                        {props.socialVal.blogger && (
                             <a
-                                href={socialsData.blogger}
+                                href={props.socialVal.blogger}
                                 target='_blank'
                                 rel='noreferrer'
                             >
@@ -143,7 +141,7 @@ function Landing() {
                     </div>
                 </div>
                 <img
-                    src={headerData.image}
+                    src={props.headerVal.image}
                     alt=''
                     className='landing--img'
                     style={{
@@ -159,14 +157,14 @@ function Landing() {
                         className='lcr--content'
                         style={{ color: theme.tertiary }}
                     >
-                        <h6>{headerData.title}</h6>
-                        <h1>{headerData.name}</h1>
-                        <p>{headerData.desciption}</p>
+                        <h6>{props.headerVal.title}</h6>
+                        <h1>{props.headerVal.name}</h1>
+                        <p>{props.headerVal.desciption}</p>
 
                         <div className='lcr-buttonContainer'>
-                            {headerData.resumePdf && (
+                            {props.headerVal.resumePdf && (
                                 <a
-                                    href={headerData.resumePdf}
+                                    href={props.headerVal.resumePdf}
                                     download='resume'
                                     target='_blank'
                                     rel='noreferrer'

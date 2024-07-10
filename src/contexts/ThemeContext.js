@@ -1,7 +1,9 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import Popover from '@material-ui/core/Popover';
 import { makeStyles } from '@material-ui/core/styles';
 import OpacityIcon from '@material-ui/icons/Opacity';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebaseConfig";
 import {
     greenThemeLight, greenThemeDark, bwThemeLight, bwThemeDark, blueThemeLight, blueThemeDark, redThemeLight, redThemeDark, orangeThemeLight, orangeThemeDark, purpleThemeLight, purpleThemeDark, pinkThemeLight, pinkThemeDark, yellowThemeLight, yellowThemeDark
 } from '../theme/theme'
@@ -14,6 +16,77 @@ function ThemeContextProvider(props) {
     const [theme, setTheme] = useState(orangeThemeDark)
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getThemeData = (val) => {
+        switch (val) {
+            case 'greenThemeLight':
+                return greenThemeLight
+                break;
+            case 'greenThemeDark':
+                return greenThemeDark
+                break;
+            case 'bwThemeLight':
+                return bwThemeLight
+                break;
+            case 'bwThemeDark':
+                return bwThemeDark
+                break;
+            case 'blueThemeLight':
+                return blueThemeLight
+                break;
+            case 'blueThemeDark':
+                return blueThemeDark
+                break;
+            case 'redThemeLight':
+                return redThemeLight
+                break;
+            case 'redThemeDark':
+                return redThemeDark
+                break;
+            case 'orangeThemeLight':
+                return orangeThemeLight
+                break;
+            case 'orangeThemeDark':
+                return orangeThemeDark
+                break;
+            case 'purpleThemeLight':
+                return purpleThemeLight
+                break;
+            case 'purpleThemeDark':
+                return purpleThemeDark
+                break;
+            case 'pinkThemeLight':
+                return pinkThemeLight
+                break;
+            case 'pinkThemeDark':
+                return pinkThemeDark
+                break;
+            case 'yellowThemeLight':
+                return yellowThemeLight
+                break;
+            case 'yellowThemeDark':
+                return yellowThemeDark
+                break;
+            default:
+                return orangeThemeDark
+        }
+    }
+
+    useEffect(() => {
+        setIsLoading(true)
+        async function fetchData() {
+            const docRef = doc(db, "ABT", "themeData");
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setTheme(getThemeData(docSnap.data().defaultTheme))
+                setIsLoading(false)
+            } else {
+                setIsLoading(true)
+            }
+        }
+        fetchData();
+    }, []);
     const useStyles = makeStyles((t) => ({
         selectpallet: {
             position: 'absolute',
@@ -116,7 +189,7 @@ function ThemeContextProvider(props) {
     const value = { theme, drawerOpen, setHandleDrawer }
     return (
         <div className='theme-selectmain'>
-            <OpacityIcon className={classes.selectpallet} onClick={handleClick}></OpacityIcon>
+            {!isLoading &&<OpacityIcon className={classes.selectpallet} onClick={handleClick}></OpacityIcon>}
             <Popover
                 className={classes.selectpalletPop}
                 open={open}

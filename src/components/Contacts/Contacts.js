@@ -22,12 +22,9 @@ import { FiPhone, FiAtSign } from 'react-icons/fi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 import { ThemeContext } from '../../contexts/ThemeContext';
-
-import { socialsData } from '../../data/socialsData';
-import { contactsData } from '../../data/contactsData';
 import './Contacts.css';
 
-function Contacts() {
+function Contacts(props) {
     const [open, setOpen] = useState(false);
 
     const [name, setName] = useState('');
@@ -140,7 +137,7 @@ function Contacts() {
                     message: message,
                 };
 
-                axios.post(contactsData.sheetAPI, responseData).then((res) => {
+                axios.post(props.contactVal.sheetAPI, responseData).then((res) => {
                     console.log('success');
                     setSuccess(true);
                     setErrMsg('');
@@ -282,25 +279,25 @@ function Contacts() {
 
                     <div className='contacts-details'>
                         <a
-                            href={`mailto:${contactsData.email}`}
+                            href={`mailto:${props.contactVal.email}`}
                             className='personal-details'
                         >
                             <div className={classes.detailsIcon}>
                                 <FiAtSign />
                             </div>
                             <p style={{ color: theme.tertiary }}>
-                                {contactsData.email}
+                                {props.contactVal.email}
                             </p>
                         </a>
                         <a
-                            href={`tel:${contactsData.phone}`}
+                            href={`tel:${props.contactVal.phone}`}
                             className='personal-details'
                         >
                             <div className={classes.detailsIcon}>
                                 <FiPhone />
                             </div>
                             <p style={{ color: theme.tertiary }}>
-                                {contactsData.phone}
+                                {props.contactVal.phone}
                             </p>
                         </a>
                         <div className='personal-details'>
@@ -308,14 +305,14 @@ function Contacts() {
                                 <HiOutlineLocationMarker />
                             </div>
                             <p style={{ color: theme.tertiary }}>
-                                {contactsData.address}
+                                {props.contactVal.address}
                             </p>
                         </div>
 
                         <div className='socialmedia-icons'>
-                            {socialsData.twitter && (
+                            {props.socialVal.twitter && (
                                 <a
-                                    href={socialsData.twitter}
+                                    href={props.socialVal.twitter}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -323,9 +320,9 @@ function Contacts() {
                                     <FaTwitter aria-label='Twitter' />
                                 </a>
                             )}
-                            {socialsData.github && (
+                            {props.socialVal.github && (
                                 <a
-                                    href={socialsData.github}
+                                    href={props.socialVal.github}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -333,9 +330,9 @@ function Contacts() {
                                     <FaGithub aria-label='GitHub' />
                                 </a>
                             )}
-                            {socialsData.linkedIn && (
+                            {props.socialVal.linkedIn && (
                                 <a
-                                    href={socialsData.linkedIn}
+                                    href={props.socialVal.linkedIn}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -343,9 +340,9 @@ function Contacts() {
                                     <FaLinkedinIn aria-label='LinkedIn' />
                                 </a>
                             )}
-                            {socialsData.instagram && (
+                            {props.socialVal.instagram && (
                                 <a
-                                    href={socialsData.instagram}
+                                    href={props.socialVal.instagram}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -353,9 +350,9 @@ function Contacts() {
                                     <FaInstagram aria-label='Instagram' />
                                 </a>
                             )}
-                            {socialsData.medium && (
+                            {props.socialVal.medium && (
                                 <a
-                                    href={socialsData.medium}
+                                    href={props.socialVal.medium}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -363,9 +360,9 @@ function Contacts() {
                                     <FaMediumM aria-label='Medium' />
                                 </a>
                             )}
-                            {socialsData.blogger && (
+                            {props.socialVal.blogger && (
                                 <a
-                                    href={socialsData.blogger}
+                                    href={props.socialVal.blogger}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -373,9 +370,9 @@ function Contacts() {
                                     <FaBloggerB aria-label='Blogger' />
                                 </a>
                             )}
-                            {socialsData.youtube && (
+                            {props.socialVal.youtube && (
                                 <a
-                                    href={socialsData.youtube}
+                                    href={props.socialVal.youtube}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -383,9 +380,9 @@ function Contacts() {
                                     <FaYoutube aria-label='YouTube' />
                                 </a>
                             )}
-                            {socialsData.reddit && (
+                            {props.socialVal.reddit && (
                                 <a
-                                    href={socialsData.reddit}
+                                    href={props.socialVal.reddit}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -393,9 +390,9 @@ function Contacts() {
                                     <FaRedditAlien aria-label='Reddit' />
                                 </a>
                             )}
-                            {socialsData.stackOverflow && (
+                            {props.socialVal.stackOverflow && (
                                 <a
-                                    href={socialsData.stackOverflow}
+                                    href={props.socialVal.stackOverflow}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -403,9 +400,9 @@ function Contacts() {
                                     <FaStackOverflow aria-label='Stack Overflow' />
                                 </a>
                             )}
-                            {socialsData.codepen && (
+                            {props.socialVal.codepen && (
                                 <a
-                                    href={socialsData.codepen}
+                                    href={props.socialVal.codepen}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}
@@ -413,9 +410,9 @@ function Contacts() {
                                     <FaCodepen aria-label='CodePen' />
                                 </a>
                             )}
-                            {socialsData.gitlab && (
+                            {props.socialVal.gitlab && (
                                 <a
-                                    href={socialsData.gitlab}
+                                    href={props.socialVal.gitlab}
                                     target='_blank'
                                     rel='noreferrer'
                                     className={classes.socialIcon}

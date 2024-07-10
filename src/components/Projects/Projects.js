@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { projectsData } from '../../data/projectsData'
 import { HiArrowRight } from "react-icons/hi";
 
 import './Projects.css'
 import SingleProject from './SingleProject/SingleProject';
 
-function Projects() {
+function Projects(props) {
 
     const { theme } = useContext(ThemeContext);
 
@@ -45,14 +44,14 @@ function Projects() {
 
     return (
         <>
-            {projectsData.length > 0 && (
+            {props.projects.length > 0 && (
                 <div className="projects" id="projects" style={{backgroundColor: theme.secondary}}>
                     <div className="projects--header">
                         <h1 style={{color: theme.primary}}>Projects</h1>
                     </div>
                     <div className="projects--body">
                         <div className="projects--bodyContainer">
-                            {projectsData.slice(0, 3).map(project => (
+                            {props.projects.slice(0, 3).map(project => (
                                 <SingleProject
                                     theme={theme}
                                     key={project.id}
@@ -67,7 +66,7 @@ function Projects() {
                             ))}
                         </div> 
 
-                        {projectsData.length > 3 && (
+                        {props.projects.length > 3 && (
                             <div className="projects--viewAll">
                                 <Link to="/projects">
                                     <button className={classes.viewAllBtn}>
