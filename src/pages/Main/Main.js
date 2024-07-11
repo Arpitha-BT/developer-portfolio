@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet'
 import { Navbar, Footer, Landing, About, Skills, Education, Contacts, Projects } from '../../components'
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
 
 function Main() {
@@ -21,6 +21,15 @@ function Main() {
             return abtData;
         }
         fetchData();
+    }, []);
+    useEffect(() => {
+        onSnapshot(collection(db, "ABT"), (snapshot) => {
+            let abtDataref = {}
+            snapshot.forEach((doc) => {
+                abtDataref[doc.id] = doc.data()
+            });
+            setAbtData(abtDataref)
+        });
     }, []);
     return (
         <div>

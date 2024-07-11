@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react'
 import Popover from '@material-ui/core/Popover';
 import { makeStyles } from '@material-ui/core/styles';
 import OpacityIcon from '@material-ui/icons/Opacity';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 import {
     greenThemeLight, greenThemeDark, bwThemeLight, bwThemeDark, blueThemeLight, blueThemeDark, redThemeLight, redThemeDark, orangeThemeLight, orangeThemeDark, purpleThemeLight, purpleThemeDark, pinkThemeLight, pinkThemeDark, yellowThemeLight, yellowThemeDark
@@ -12,62 +12,46 @@ import './ThemeContext.css';
 export const ThemeContext = createContext()
 
 function ThemeContextProvider(props) {
-    // eslint-disable-next-line
     const [theme, setTheme] = useState(orangeThemeDark)
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
+    const [showTheme, setShowTheme] = useState(true);
 
     const getThemeData = (val) => {
         switch (val) {
             case 'greenThemeLight':
                 return greenThemeLight
-                break;
             case 'greenThemeDark':
                 return greenThemeDark
-                break;
             case 'bwThemeLight':
                 return bwThemeLight
-                break;
             case 'bwThemeDark':
                 return bwThemeDark
-                break;
             case 'blueThemeLight':
                 return blueThemeLight
-                break;
             case 'blueThemeDark':
                 return blueThemeDark
-                break;
             case 'redThemeLight':
                 return redThemeLight
-                break;
             case 'redThemeDark':
                 return redThemeDark
-                break;
             case 'orangeThemeLight':
                 return orangeThemeLight
-                break;
             case 'orangeThemeDark':
                 return orangeThemeDark
-                break;
             case 'purpleThemeLight':
                 return purpleThemeLight
-                break;
             case 'purpleThemeDark':
                 return purpleThemeDark
-                break;
             case 'pinkThemeLight':
                 return pinkThemeLight
-                break;
             case 'pinkThemeDark':
                 return pinkThemeDark
-                break;
             case 'yellowThemeLight':
                 return yellowThemeLight
-                break;
             case 'yellowThemeDark':
                 return yellowThemeDark
-                break;
             default:
                 return orangeThemeDark
         }
@@ -86,6 +70,11 @@ function ThemeContextProvider(props) {
             }
         }
         fetchData();
+    }, []);
+    useEffect(() => {
+        onSnapshot(doc(db, "ABT", "themeData"), (doc) => {
+            setTheme(getThemeData(doc.data().defaultTheme))
+        });
     }, []);
     const useStyles = makeStyles((t) => ({
         selectpallet: {
@@ -189,7 +178,7 @@ function ThemeContextProvider(props) {
     const value = { theme, drawerOpen, setHandleDrawer }
     return (
         <div className='theme-selectmain'>
-            {!isLoading &&<OpacityIcon className={classes.selectpallet} onClick={handleClick}></OpacityIcon>}
+            {!isLoading &&<OpacityIcon id='themechangeIcon' className={classes.selectpallet} onClick={handleClick}></OpacityIcon>}
             <Popover
                 className={classes.selectpalletPop}
                 open={open}

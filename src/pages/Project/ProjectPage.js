@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { AiOutlineHome } from "react-icons/ai";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
 
 import './ProjectPage.css'
@@ -12,7 +12,6 @@ import { SingleProject } from '../../components';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 function ProjectPage() {
-
     const [isLoading, setIsLoading] = useState(true);
     const [search, setSearch] = useState('')
     const [projectsData, setProjectsData] = useState([]);
@@ -33,7 +32,13 @@ function ProjectPage() {
         fetchData();
     }, []);
 
-    const filteredArticles =  projectsData.filter((project) => {
+    useEffect(() => {
+        onSnapshot(doc(db, "ABT", "projectsData"), (doc) => {
+            setProjectsData(doc.data().projects)
+        });
+    }, []);
+
+    const filteredArticles = projectsData.filter((project) => {
         const content = project.projectName + project.projectDesc + project.tags
         return content.toLowerCase().includes(search.toLowerCase())
     })
@@ -100,22 +105,22 @@ function ProjectPage() {
                     <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search project..." className={classes.search} />
                 </div>
                 <div className="project-container">
-                    {!isLoading && 
-                    <Grid className="project-grid" container direction="row" alignItems="center" justifyContent="center">
-                        {filteredArticles.map(project => (
-                            <SingleProject
-                                theme={theme}
-                                key={project.id}
-                                id={project.id}
-                                name={project.projectName}
-                                desc={project.projectDesc}
-                                tags={project.tags}
-                                code={project.code}
-                                demo={project.demo}
-                                image={project.image}
-                            />
-                        ))}
-                    </Grid>}
+                    {!isLoading &&
+                        <Grid className="project-grid" container direction="row" alignItems="center" justifyContent="center">
+                            {filteredArticles.map(project => (
+                                <SingleProject
+                                    theme={theme}
+                                    key={project.id}
+                                    id={project.id}
+                                    name={project.projectName}
+                                    desc={project.projectDesc}
+                                    tags={project.tags}
+                                    code={project.code}
+                                    demo={project.demo}
+                                    image={project.image}
+                                />
+                            ))}
+                        </Grid>}
                 </div>
             </div>
         </div>
