@@ -1,0 +1,59 @@
+.resumePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+.resumePage-header {
+    height: 35vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.resumePage-header > h1 {
+    font-size: 4rem;
+    font-family: var(--primaryFont);
+}
+
+.resumePage-container {
+    padding: 3rem 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media (min-width: 992px) and (max-width: 1380px) {
+
+}
+
+@media screen and (max-width: 992px) {
+    .resumePage-header {
+        height: 25vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .resumePage-header h1 {
+        font-size: 3rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    .resumePage-header {
+        height: 20vh;
+    }
+    .resumePage-header h1 {
+        font-size: 2.5rem;
+    }
+}

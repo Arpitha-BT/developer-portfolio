@@ -12,19 +12,7 @@ import './ThemeContext.css';
 export const ThemeContext = createContext()
 
 function ThemeContextProvider(props) {
-    function watchHistoryEvents() {
-        const { pushState } = window.history;
-
-        window.history.pushState = function (...args) {
-            pushState.apply(window.history, args);
-            window.dispatchEvent(new Event('pushState'));
-        };
-        window.addEventListener('pushState', (event) => {
-            event.preventDefault()
-            setShowTheme(window.location.pathname === "/" ? true : false)
-        });
-    }
-    watchHistoryEvents();
+    
     const [theme, setTheme] = useState(orangeThemeDark)
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
@@ -186,9 +174,15 @@ function ThemeContextProvider(props) {
         setDrawerOpen(!drawerOpen)
     }
 
+    const setShowthemHandle = (val) => {
+        console.log(val)
+        console.log('hello')
+        setShowTheme(val)
+    }
 
 
-    const value = { theme, drawerOpen, setHandleDrawer }
+
+    const value = { theme, drawerOpen, setHandleDrawer, setShowthemHandle }
     return (
         <div className='theme-selectmain'>
             {!isLoading && showTheme &&<OpacityIcon id='themechangeIcon' className={classes.selectpallet} onClick={handleClick}></OpacityIcon>}

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from 'react-helmet'
 import { Navbar, Footer, Landing, About, Skills, Education, Contacts, Projects } from '../../components'
 import { collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 function Main() {
     const [isLoading, setIsLoading] = useState(true);
     const [abtData, setAbtData] = useState(null);
+    const { setShowthemHandle } = useContext(ThemeContext);
+    setShowthemHandle(true)
     useEffect(() => {
         setIsLoading(true)
         async function fetchData() {
