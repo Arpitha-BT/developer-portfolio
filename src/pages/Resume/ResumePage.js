@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
+import ReactLoading from 'react-loading';
 import { AiOutlineHome } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
 import './ResumePage.css'
@@ -57,7 +58,7 @@ function ResumePage() {
                 <h1 style={{ color: theme.secondary }}>Resume</h1>
             </div>
             <div className="resumePage-container">
-                <Document file={pdf} className="d-flex justify-content-center">
+                <Document file={pdf} className="d-flex justify-content-center" loading={<ReactLoading type="spinningBubbles" color={theme.primary} height={'10%'} width={'10%'} />}>
                     <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
                 </Document>
             </div>
