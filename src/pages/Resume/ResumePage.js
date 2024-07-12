@@ -13,14 +13,12 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 function ResumePage() {
     const { theme, setShowthemHandle } = useContext(ThemeContext);
     const [width, setWidth] = useState(1200);
-    const [pdf, setPdf] = useState('https://firebasestorage.googleapis.com/v0/b/arpitha-b-t.appspot.com/o/resume.pdf?alt=media&token=92afc816-3304-4bbc-8b6b-dbf0bbfe67cc')
+    const pdf = 'https://firebasestorage.googleapis.com/v0/b/arpitha-b-t.appspot.com/o/resume.pdf?alt=media&token=92afc816-3304-4bbc-8b6b-dbf0bbfe67cc';
 
     useEffect(() => {
         setWidth(window.innerWidth);
     }, []);
-
-
-    setShowthemHandle(false)
+    setTimeout(() => setShowthemHandle(false), 0);
     const useStyles = makeStyles((t) => ({
         home: {
             color: theme.secondary,

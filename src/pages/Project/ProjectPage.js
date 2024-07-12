@@ -16,7 +16,7 @@ function ProjectPage() {
     const [search, setSearch] = useState('')
     const [projectsData, setProjectsData] = useState([]);
     const { theme, setShowthemHandle } = useContext(ThemeContext);
-    setShowthemHandle(false)
+    setTimeout(() => setShowthemHandle(false), 0);
     useEffect(() => {
         setIsLoading(true)
         async function fetchData() {
