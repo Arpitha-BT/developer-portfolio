@@ -175,8 +175,6 @@ function ThemeContextProvider(props) {
     }
 
     const setShowthemHandle = (val) => {
-        console.log(val)
-        console.log('hello')
         setShowTheme(val)
     }
 

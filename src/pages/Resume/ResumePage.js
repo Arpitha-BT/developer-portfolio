@@ -1,14 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { AiOutlineHome } from "react-icons/ai";
+import { Document, Page, pdfjs } from "react-pdf";
 import './ResumePage.css'
 import { ThemeContext } from '../../contexts/ThemeContext';
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 
 function ResumePage() {
     const { theme, setShowthemHandle } = useContext(ThemeContext);
+    const [width, setWidth] = useState(1200);
+    const [pdf, setPdf] = useState('https://firebasestorage.googleapis.com/v0/b/arpitha-b-t.appspot.com/o/resume.pdf?alt=media&token=92afc816-3304-4bbc-8b6b-dbf0bbfe67cc')
+
+    useEffect(() => {
+        setWidth(window.innerWidth);
+    }, []);
+
+
     setShowthemHandle(false)
     const useStyles = makeStyles((t) => ({
         home: {
@@ -48,7 +59,9 @@ function ResumePage() {
                 <h1 style={{ color: theme.secondary }}>Resume</h1>
             </div>
             <div className="resumePage-container">
-                <iframe src="https://firebasestorage.googleapis.com/v0/b/arpitha-b-t.appspot.com/o/resume.pdf?alt=media&token=92afc816-3304-4bbc-8b6b-dbf0bbfe67cc" width="100%" height="500px" />
+                <Document file={pdf} className="d-flex justify-content-center">
+                    <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
+                </Document>
             </div>
         </div>
     )
