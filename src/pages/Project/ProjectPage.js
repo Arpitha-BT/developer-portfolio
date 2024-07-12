@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { Grid } from '@material-ui/core'
+import ReactLoading from 'react-loading';
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { AiOutlineHome } from "react-icons/ai";
@@ -100,6 +101,7 @@ function ProjectPage() {
                 </Link>
                 <h1 style={{ color: theme.secondary }}>Projects</h1>
             </div>
+            {isLoading && <><div className="loadingThemme"><ReactLoading type="spinningBubbles" color={theme.primary} height={'10%'} width={'10%'} /></div></>}
             <div className="projectPage-container">
                 <div className="projectPage-search">
                     <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search project..." className={classes.search} />

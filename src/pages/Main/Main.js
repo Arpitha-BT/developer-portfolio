@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from 'react-helmet'
-import { Navbar, Footer, Landing, About, Skills, Education, Contacts, Projects } from '../../components'
+import ReactLoading from 'react-loading';
+import { Navbar, Footer, Landing, About, Skills, Education, Contacts } from '../../components'
 import { collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
 import { ThemeContext } from '../../contexts/ThemeContext';
+import './Main.css'
 
 function Main() {
     const [isLoading, setIsLoading] = useState(true);
     const [abtData, setAbtData] = useState(null);
-    const { setShowthemHandle } = useContext(ThemeContext);
+    const { theme, setShowthemHandle } = useContext(ThemeContext);
     setTimeout(() => setShowthemHandle(true), 0);
     useEffect(() => {
         setIsLoading(true)
@@ -45,11 +47,11 @@ function Main() {
                 <About {...abtData.aboutData} />
                 <Education {...abtData.educationData} />
                 <Skills {...abtData.skillsData} />
-                <Projects {...abtData.projectsData} />
                 <Contacts contactVal={abtData.contactsData} socialVal={abtData.socialsData} />
                 <Footer {...abtData.headerData} />
             </>}
-            {isLoading && <title>Loading - Porfolio</title>}
+            {isLoading && <><div className="loadingThemme"><ReactLoading type="spinningBubbles" color={theme.primary} height={'10%'} width={'10%'} /></div></> 
+            }
         </div>
     )
 }
