@@ -9,7 +9,7 @@ function Main() {
     const [isLoading, setIsLoading] = useState(true);
     const [abtData, setAbtData] = useState(null);
     const { setShowthemHandle } = useContext(ThemeContext);
-    setTimeout(() => setShowthemHandle(false), 0);
+    setTimeout(() => setShowthemHandle(true), 0);
     useEffect(() => {
         setIsLoading(true)
         async function fetchData() {
