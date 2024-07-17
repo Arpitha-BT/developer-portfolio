@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Button } from '@material-ui/core';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
 import { makeStyles } from '@material-ui/core/styles';
-
 import './Landing.css';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { useHistory } from 'react-router-dom';
 
 import {
     FaTwitter,
@@ -15,7 +15,16 @@ import {
 } from 'react-icons/fa';
 
 function Landing(props) {
+    const history = useHistory();
     const { theme, drawerOpen } = useContext(ThemeContext);
+    let loginClickCount = 0;
+    const loginHandler = (event) => {
+        loginClickCount+=1;
+        if (loginClickCount === 10) {
+            history.push('/Login');
+            loginClickCount = 0;
+        }
+    }
 
     const useStyles = makeStyles((t) => ({
         resumeBtn: {
@@ -140,7 +149,7 @@ function Landing(props) {
                         )}
                     </div>
                 </div>
-                <img
+                <img onClick={loginHandler}
                     src={props.headerVal.image}
                     alt=''
                     className='landing--img'
