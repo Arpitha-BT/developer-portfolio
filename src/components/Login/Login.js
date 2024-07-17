@@ -40,7 +40,7 @@ const EmailPasswordLoginScreen = () => {
                 border: `3px solid ${theme.tertiary}`,
             },
             [t.breakpoints.down('sm')]: {
-                display: 'none',
+                width: '240px',
             },
         },
         logoutBtn: {
@@ -62,7 +62,7 @@ const EmailPasswordLoginScreen = () => {
                 border: `3px solid ${theme.tertiary}`,
             },
             [t.breakpoints.down('sm')]: {
-                display: 'none',
+                width: '240px',
             },
         }
     }));

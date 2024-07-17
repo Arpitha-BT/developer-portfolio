@@ -36,7 +36,7 @@ const AdminEditArray = (props) => {
     return (
         <>
             <div style={{ width: '100%' }}>
-                <Accordion>
+                <Accordion style={{ backgroundColor: theme.primary400 }}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"

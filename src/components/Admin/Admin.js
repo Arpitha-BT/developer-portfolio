@@ -67,7 +67,7 @@ const Admin = () => {
         <>
             <div style={{width: '100%'}}>
                 {!isLoading && abtData.map(abt => (
-                        <Accordion>
+                        <Accordion style={{ backgroundColor: theme.primary }}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
