@@ -1,3 +1,10 @@
 .adminAccordin-container {
     width: 100%;
 }
+
+.fileEditContainer {
+    margin: 20px;
+}
+.fileEditContainer>div {
+    padding-bottom: 20px;
+}
