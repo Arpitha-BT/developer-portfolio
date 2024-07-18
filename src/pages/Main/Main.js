@@ -47,7 +47,7 @@ function Main() {
                 <About {...abtData.aboutData} />
                 <Education {...abtData.educationData} />
                 <Skills {...abtData.skillsData} />
-                <Contacts contactVal={abtData.contactsData} socialVal={abtData.socialsData} />
+                <Contacts contactVal={abtData.contactsData} socialVal={abtData.socialsData} headerVal={abtData.headerData}/>
                 <Footer {...abtData.headerData} />
             </>}
             {isLoading && <><div className="loadingThemme"><ReactLoading type="spinningBubbles" color={theme.primary} height={'10%'} width={'10%'} /></div></> 
